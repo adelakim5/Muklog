@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #naver-map {
+        width: 500px;
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="naver-map"></div>
+  </body>
+  <script
+    type="text/javascript"
+    src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}&callback=renderMap"
+  ></script>
+  <script>
+    let map = null;
+    let marker = null;
+    function renderMap() {
+      map = new naver.maps.Map("naver-map", {
+        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        zoom: 14,
+      });
+      marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(37.3595704, 127.105399),
+        map,
+      });
+
+      let markerEl = marker.getElement();
+      let listener = naver.maps.Event.addDOMListener(markerEl, "click", () => {
+        alert("여기는 네이버 그린 팩토리 입니다!!");
+      });
+    }
+  </script>
+</html>
