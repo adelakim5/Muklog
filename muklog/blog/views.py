@@ -12,8 +12,9 @@ def tempHome(request):
 
 def create(request):
     blog = Blog()
-    blog.title = request.GET['title']
-    blog.body = request.GET['body']
+    blog.title = request.POST['title']
+    blog.body = request.POST['body']
+    blog.thumbnail = request.FILES['image']
     blog.pub_date = timezone.datetime.now()
     blog.save()
     return redirect("blog/"+str(blog.id))
