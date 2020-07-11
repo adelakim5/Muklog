@@ -37,9 +37,23 @@
         map,
       });
 
+      let content = `
+        <div>
+          나중에 지도의 정보를 표시할 창입니다.
+        </div>
+      `;
+
+      let info = new naver.maps.InfoWindow({
+        content,
+      });
+
       let markerEl = marker.getElement();
       let listener = naver.maps.Event.addDOMListener(markerEl, "click", () => {
-        alert("여기는 현재위치 입니다!!");
+        if (info.getMap()) {
+          info.close();
+        } else {
+          info.open(map, marker);
+        }
       });
     }
 
