@@ -128,7 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'muklog', 'static')
+    os.path.join(BASE_DIR, 'muklog', 'static'),
+    os.path.join(BASE_DIR, 'map', 'static')
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

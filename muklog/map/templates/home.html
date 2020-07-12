@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,64 +17,18 @@
     <div id="naver-map"></div>
     <div id="temp"></div>
   </body>
+  <script type="module" src="{% static 'map/js/render.js' %}"></script>
+  <script type="module" src="{% static 'map/js/marker.js' %}"></script>
+  <script type="module" src="{% static 'map/js/main.js' %}"></script>
+  <script type="module" src="{% static 'map/js/markerCluster.js' %}"></script>
   <script
     type="text/javascript"
-    src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}&callback=renderMap"
+    src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}"
   ></script>
-  <script>
-    let map = null;
-    let temp = document.getElementById("temp");
-    let marker = null;
-    let currentLocation = { lat: 37.3595704, lng: 127.105399 };
-    function renderMap() {
-      map = new naver.maps.Map("naver-map", {
-        center: new naver.maps.LatLng(currentLocation.lat, currentLocation.lng),
-        zoom: 14,
-      });
-      marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(
-          currentLocation.lat,
-          currentLocation.lng
-        ),
-        map,
-      });
-
-      let content = `
-        <div>
-          나중에 지도의 정보를 표시할 창입니다.
-        </div>
-      `;
-
-      let info = new naver.maps.InfoWindow({
-        content,
-      });
-
-      let markerEl = marker.getElement();
-      let listener = naver.maps.Event.addDOMListener(markerEl, "click", () => {
-        if (info.getMap()) {
-          info.close();
-        } else {
-          info.open(map, marker);
-        }
-      });
-    }
-
-    getLocation();
-
-    function getLocation() {
-      if (!navigator.geolocation) {
-        alert("이 브라우저에서는 HTML5가 지원하지 않습니다.");
-        return;
-      }
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          let { latitude, longitude } = position.coords;
-          currentLocation.lat = latitude;
-          currentLocation.lng = longitude;
-        },
-        (error) => console.log(error),
-        { maximumAge: 60000, timeout: 5000, enableHighAccuracy: true }
-      );
-    }
+  <script type="module">
+    import Marker from "../static/map/js/marker.js"
+    import Main from "../static/map/js/main.js";
+    const main = new Main("{{ STATIC_URL }}") 
+    main.render();
   </script>
 </html>
