@@ -9,14 +9,27 @@
         <br>
         Password: <input type="password" name="password" id="">
         <br>
+        <input type="hidden" name="next" value="{{ next }}">
         <input type="submit" value="login" id="">
     </form>
-    
-    <!-- <form action="{% url 'signup' %}" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="path" value={{request.path}}>
-        <input type="submit" value="회원가입 고!">
-    </form> -->
+
     <a href="{% url 'signup'%}">회원가입 고!</a>
     
 </div>
+
+<!-- <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+        </tr>
+    </table>
+
+    <input type="submit" value="login">
+    <input type="hidden" name="next" value="{{ next }}">
+</form> -->
