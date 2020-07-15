@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- body content -->
+    {% block content %} 
+    {% endblock %} 
+
+    <!-- js module -->
+    {% block modules %} 
+    {% endblock %} 
+
+    <!-- naver api js -->
+    <script type="module" src="{% static 'map/js/render.js' %}"></script>
+    <script type="module" src="{% static 'map/js/main.js' %}"></script>
+    <script
+      type="text/javascript"
+      src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qbtc7gdm2w"
+    ></script>
+    <script type="module">
+      import Marker from "../static/map/js/marker.js"
+      import Main from "../static/map/js/main.js";
+      
+      const main = new Main("{{ STATIC_URL }}") ;
+      
+      main.render();
+    </script>
+  </body>
+</html>
