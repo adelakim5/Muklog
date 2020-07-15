@@ -1,6 +1,6 @@
 import Marker from "./marker.js";
 import { MarkerClustering } from "./markerCluster.js";
-import { MarkerClusterImg } from "./shared.js";
+import { getClusterImg } from "./shared.js";
 
 let map = null;
 let currentLocation = { lat: 37.3595704, lng: 127.105399 };
@@ -26,7 +26,7 @@ export function renderMap(url) {
     marker.setInfo(`<div>이건 ${i}번째 마커</div>`);
     markers.push(marker.marker);
   }
-
+  const markerImg = getClusterImg(DJANGO_STATIC_URL);
   var markerClustering = new MarkerClustering({
     minClusterSize: 2,
     maxZoom: 8,
@@ -35,11 +35,11 @@ export function renderMap(url) {
     disableClickZoom: false,
     gridSize: 120,
     icons: [
-      MarkerClusterImg.marker1,
-      MarkerClusterImg.marker2,
-      MarkerClusterImg.marker3,
-      MarkerClusterImg.marker4,
-      MarkerClusterImg.marker5,
+      markerImg.marker1,
+      markerImg.marker2,
+      markerImg.marker3,
+      markerImg.marker4,
+      markerImg.marker5,
     ],
     indexGenerator: [10, 100, 200, 500, 1000],
     stylingFunction: function (clusterMarker, count) {
