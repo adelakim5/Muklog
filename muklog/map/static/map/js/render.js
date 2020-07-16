@@ -7,6 +7,8 @@ let currentLocation = { lat: 37.3595704, lng: 127.105399 };
 let DJANGO_STATIC_URL = null;
 
 export function renderMap(url) {
+  let latInput = document.getElementById("map-lat");
+  let lngInput = document.getElementById("map-lng");
   DJANGO_STATIC_URL = url;
 
   getLocation();
@@ -14,19 +16,34 @@ export function renderMap(url) {
     center: new naver.maps.LatLng(currentLocation.lat, currentLocation.lng),
     zoom: 14,
   });
-  let markers = [];
-  for (let i = 1; i < 100; i++) {
-    let marker = new Marker(
-      {
-        lat: currentLocation.lat + 0.01 + Math.random(),
-        lng: currentLocation.lng + 0.01 + Math.random(),
-      },
-      map
-    );
-    marker.setInfo(`<div>이건 ${i}번째 마커</div>`);
-    markers.push(marker.marker);
+  let marker = new Marker(currentLocation, map);
+  marker.setInfo("클릭한 지점");
+  let listener = naver.maps.Event.addListener(map, "click", (e) => {
+    console.log(e.coord);
+    marker.marker.setPosition(e.coord);
+    latInput.value = e.coord._lat;
+    lngInput.value = e.coord._lng;
+  });
+}
+
+function getLocation() {
+  if (!navigator.geolocation) {
+    alert("이 브라우저에서는 HTML5가 지원하지 않습니다.");
+    return;
   }
-  const markerImg = getClusterImg(DJANGO_STATIC_URL);
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      let { latitude, longitude } = position.coords;
+      currentLocation.lat = latitude;
+      currentLocation.lng = longitude;
+    },
+    (error) => console.log(error),
+    { maximumAge: 60000, timeout: 5000, enableHighAccuracy: true }
+  );
+}
+
+/*
+const markerImg = getClusterImg(DJANGO_STATIC_URL);
   var markerClustering = new MarkerClustering({
     minClusterSize: 2,
     maxZoom: 8,
@@ -48,20 +65,4 @@ export function renderMap(url) {
       child[0].innerText = count;
     },
   });
-}
-
-function getLocation() {
-  if (!navigator.geolocation) {
-    alert("이 브라우저에서는 HTML5가 지원하지 않습니다.");
-    return;
-  }
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      let { latitude, longitude } = position.coords;
-      currentLocation.lat = latitude;
-      currentLocation.lng = longitude;
-    },
-    (error) => console.log(error),
-    { maximumAge: 60000, timeout: 5000, enableHighAccuracy: true }
-  );
-}
+*/

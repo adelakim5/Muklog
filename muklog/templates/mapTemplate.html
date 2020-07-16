@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- body content -->
+    {% block content %} 
+    {% endblock %}
+    
+    <script
+      type="text/javascript"
+      src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}"
+    ></script>
+    <script type="module"> 
+      import naverMap from "../static/map/js/naverMap.js";
+      
+      const main = new naverMap("{{ STATIC_URL }}") ;
+
+      main.render();
+    </script>
+  </body>
+</html>

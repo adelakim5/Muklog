@@ -1,4 +1,19 @@
+{% extends "mapTemplate.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+#naver-map{
+    width:500px;
+    height:500px;
+}
+</style>
+<div id="naver-map"></div>
 <div>
+    <input type="text" id="search" value="">
+    <button id="search-btn">검색</button>
+    <div id="search-list">
+    </div>
     <form method='post' action="{% url 'create' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <h4>title: </h4>
@@ -9,8 +24,55 @@
         <textarea cols="40" rows="10" name="body"></textarea>
         <br>
         <br>
+        <input type="text" name="lat" id="map-lat" value="">
+        <input type="text" name="lng" id="map-lng" value="">
         <input type="file" name="image" id="imageUpload" accept="media/*">
         <input type="submit" value="submit">
     </form>
 </div>
-<!--  -->
+<!-- 
+<script>
+    let searchInput = document.getElementById("search");
+    let searchBtn = document.getElementById("search-btn");
+    let searchList = document.getElementById("search-list");
+    let latInput = document.getElementById("map-lat");
+    let lngInput = document.getElementById("map-lng");
+    
+    searchBtn.addEventListener('click',(e) => search(e));
+    function search(e){
+        naver.maps.Service.geocode({
+        query: searchInput.value,
+        }, function(status, response) {
+            if (status !== naver.maps.Service.Status.OK) {
+                return alert('Something wrong!');
+            }
+
+            var result = response.v2, // 검색 결과의 컨테이너
+                {addresses} = result; // 검색 결과의 배열
+            // console.log(addresses)
+            setList(addresses);
+        });
+    }
+
+    function setList(items){
+        items.forEach(e => {
+            let {roadAddress,x,y} = e;
+            let el = document.createElement('div');
+            el.innerHTML = `
+                <h4>${roadAddress}</h4>
+                <span>lat : ${y}</span>
+                <span>lng : ${x}</span>
+            `
+            el.addEventListener('click', () => setPosition(y,x))
+            searchList.appendChild(el);
+        })
+    }
+
+    function setPosition(lat,lng){
+        latInput.value = lat;
+        lngInput.value = lng;    
+    }
+    
+</script>
+<-->
+{% endblock %}
