@@ -1,11 +1,6 @@
 {% extends "mapTemplate.html" %}
 {% load static %}
 
-{% block modules %}
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qbtc7gdm2w&submodules=geocoder"></script>
-<script type="module" src="{% static 'map/js/marker.js' %}"></script>
-{% endblock  %}
-
 {% block content %}
 <style>
 #naver-map{
@@ -35,6 +30,7 @@
         <input type="submit" value="submit">
     </form>
 </div>
+<!-- 
 <script>
     let searchInput = document.getElementById("search");
     let searchBtn = document.getElementById("search-btn");
@@ -78,5 +74,5 @@
     }
     
 </script>
+<-->
 {% endblock %}
-<!--  -->
