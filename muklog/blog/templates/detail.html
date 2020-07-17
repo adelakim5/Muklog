@@ -2,4 +2,5 @@
 <img src="{{detail.thumbnail.url}}" alt="thumbnail" width='600'>
 <p> {{ detail.pub_date }} </p>
 <p> {{ detail.body }} </p>
+<a href="{% url 'edit' detail.id %}">수정하기</a>
 <a href="{% url 'tempHome' %}">임시홈으로 돌아가기</a>

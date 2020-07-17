@@ -132,7 +132,8 @@ USE_TZ = True
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'muklog', 'static'),
-    os.path.join(BASE_DIR, 'map', 'static')
+    os.path.join(BASE_DIR, 'map', 'static'),
+    os.path.join(BASE_DIR, 'blog', 'static')
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
