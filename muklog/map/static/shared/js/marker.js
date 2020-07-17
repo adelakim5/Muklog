@@ -1,7 +1,8 @@
 class Marker {
   constructor(position, map) {
+    const { latitude, longitude } = position;
     this.marker = new naver.maps.Marker({
-      position: new naver.maps.LatLng(position.lat, position.lng),
+      position: new naver.maps.LatLng(latitude, longitude),
       map,
     });
     this.map = map;
@@ -21,6 +22,10 @@ class Marker {
         }
       }
     );
+  }
+
+  changePosition(latLng) {
+    this.marker.setPosition(latLng);
   }
 }
 

@@ -2,7 +2,7 @@ import Marker from "./marker.js";
 
 const DEFAULT_LOCATION = { latitude: 37.3595704, longitude: 127.105399 };
 
-class naverMap {
+class NaverMap {
   constructor(staticUrl) {
     this.staticUrl = staticUrl;
     this.map = null;
@@ -22,6 +22,14 @@ class naverMap {
   }
 
   setCenterMap() {
+    const successCallback = (position) => {
+      const { latitude, longitude } = position.coords;
+      const latLng = new naver.maps.LatLng(latitude, longitude);
+      this.map.setCenter(latLng);
+      this.userPositionMarker.changePosition(latLng);
+    };
+    const errorCallback = (error) => console.log(error);
+
     if (!navigator.geolocation) {
       alert(
         "이 브라우저에서는 HTML5를 지원하지 않습니다. 현재위치를 불러올 수 없습니다."
@@ -40,15 +48,6 @@ class naverMap {
       errorCallback,
       getCurrentPositionOptions
     );
-
-    const successCallback = (position) => {
-      const { latitude, longitude } = position.coords;
-      const latLng = new naver.maps.LatLng(latitude, longitude);
-      this.map.setCenter(latLng);
-      this.userPositionMarker.changePosition(latLng);
-    };
-
-    const errorCallback = (error) => console.log(error);
   }
 
   render() {
@@ -56,4 +55,4 @@ class naverMap {
   }
 }
 
-export default naverMap;
+export default NaverMap;

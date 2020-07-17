@@ -1,13 +1,6 @@
 {% extends 'mapTemplate.html' %}
 {% load static %}
 
-{% block module %}
-  <script type="module" src="{% static 'map/js/shared.js' %}"></script>
-  <script type="module" src="{% static 'map/js/render.js' %}"></script>
-  <script type="module" src="{% static 'map/js/marker.js' %}"></script>
-  <script type="module" src="{% static 'map/js/markerCluster.js' %}"></script>
-{% endblock %}
-
 {% block content %}
   <style>
     #naver-map {
@@ -19,4 +12,16 @@
   <a href="{% url 'login' %}?next={{ request.path }}">login~</a>
   <div id="naver-map"></div>
   <div id="temp"></div>
+{% endblock %}
+
+{% block javascript %}
+  <script type="module"> 
+    import ClusteredMap from "../static/map/js/ClusteredMap.js";  
+    // const mukLogs = {{ muk_logs }};
+    const mukLogs = [{title:"한남대 놀숲",latitude:36.3509288,longitude:127.4256322}]
+    const staticUrl = "{{ STATIC_URL }}";
+    const clusteredMap = new ClusteredMap(staticUrl);
+    clusteredMap.render();
+    clusteredMap.setClustering(mukLogs);
+  </script>
 {% endblock %}
