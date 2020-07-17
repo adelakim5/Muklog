@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Blog
 from django.utils import timezone
+from django.conf import settings
 
 # Create your views here.
 
 
 def write(request):
-    return render(request, 'write.html')
+    return render(request, 'write.html', {"naver_client_id": settings.NAVER_CLIENT_ID})
 
 
 def tempHome(request):
