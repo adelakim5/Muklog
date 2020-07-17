@@ -16,12 +16,7 @@
       type="text/javascript"
       src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}"
     ></script>
-    <script type="module"> 
-      import naverMap from "../static/map/js/naverMap.js";
-      
-      const main = new naverMap("{{ STATIC_URL }}") ;
-
-      main.render();
-    </script>
+    {% block javascript %}
+    {% endblock %}
   </body>
 </html>
