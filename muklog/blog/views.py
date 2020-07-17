@@ -37,13 +37,14 @@ def detail(request, blog_id):
     blog_detail = get_object_or_404(Blog, pk=blog_id, user=user)
     return render(request, 'detail.html', {'detail': blog_detail})
 
+
 def edit(request, blog_id):
     user = request.user
     blog = Blog.objects.get(id=blog_id, user=user)
     if request.method == "POST":
         blog.title = request.POST['title']
-        thumbnail = request.FILES.get('thumbnail')
-        if thumbnail != "":
+        thumbnail = request.FILES.get('image')
+        if thumbnail != None:
             blog.thumbnail = thumbnail
         blog.body = request.POST['body']
         # blog.latitude = request.POST['latitude']
@@ -54,4 +55,3 @@ def edit(request, blog_id):
         return redirect('/blog/blog/'+str(blog_id))
     else:
         return render(request, 'edit.html', {"blog": blog})
-

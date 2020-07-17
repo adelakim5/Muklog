@@ -1,5 +1,10 @@
+{% load static %}
 <h1>{{ detail.title }}</h1>
+{% if detail.thumbnail %}
 <img src="{{detail.thumbnail.url}}" alt="thumbnail" width='600'>
+{% else %}
+<img src="{% static 'image/default.jpg' %}" alt="thumbnail" width='600'>
+{% endif %}
 <p> {{ detail.pub_date }} </p>
 <p> {{ detail.body }} </p>
 <a href="{% url 'edit' detail.id %}">수정하기</a>
