@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+# from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 from .models import Blog
 from django.utils import timezone
 from django.conf import settings
@@ -11,8 +13,16 @@ def write(request):
 
 
 def tempHome(request):
-    blogs = Blog.objects.all()
-    return render(request, 'tempHome.html', {'blogs': blogs})
+    user = request.user
+    # blogs = Blog.objects.all()
+    if user.is_authenticated:
+        try:
+            blogs = Blog.objects.all().filter(user=user)
+        except Blog.DoesNotExist:
+            messages.error(request, "Blog does not exist")
+        return render(request, 'tempHome.html', {'blogs': blogs, "user:": user})
+    else:
+        return render(request, 'tempHome.html')
 
 
 def create(request):
@@ -21,7 +31,7 @@ def create(request):
     blog.title = request.POST['title']
     blog.body = request.POST['body']
     thumbnail = request.FILES.get('image')
-    if thumbnail != '':
+    if thumbnail != None:
         blog.thumbnail = thumbnail
     # blog.latitude = request.POST['latitude']
     # blog.longtitude = request.POST['longitude']
@@ -55,3 +65,8 @@ def edit(request, blog_id):
         return redirect('/blog/blog/'+str(blog_id))
     else:
         return render(request, 'edit.html', {"blog": blog})
+        
+def delete(request, blog_id):
+    blog_detail = Blog.objects.get(id=blog_id)
+    blog_detail.delete()
+    return redirect('/blog/')
