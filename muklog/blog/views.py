@@ -14,13 +14,13 @@ def write(request):
 
 def tempHome(request):
     user = request.user
-    # blogs = Blog.objects.all()
     if user.is_authenticated:
+        blogs = Blog.objects.all().filter(user=user)
+        isBlogs = {'blogs':blogs}
         try:
-            blogs = Blog.objects.all().filter(user=user)
-            return render(request, 'tempHome.html', {'blogs': blogs})
+            return render(request, 'tempHome.html', isBlogs)
         except Blog.DoesNotExist:
-            messages.error(request, 'Blog dose not exist')
+            return render(request, 'tempHome.html', {'error':'Blog does not exist'})
     return render(request, 'tempHome.html')
 
 
