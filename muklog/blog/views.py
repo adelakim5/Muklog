@@ -18,11 +18,10 @@ def tempHome(request):
     if user.is_authenticated:
         try:
             blogs = Blog.objects.all().filter(user=user)
+            return render(request, 'tempHome.html', {'blogs': blogs})
         except Blog.DoesNotExist:
-            messages.error(request, "Blog does not exist")
-        return render(request, 'tempHome.html', {'blogs': blogs, "user:": user})
-    else:
-        return render(request, 'tempHome.html')
+            messages.error(request, 'Blog dose not exist')
+    return render(request, 'tempHome.html')
 
 
 def create(request):
@@ -65,7 +64,7 @@ def edit(request, blog_id):
         return redirect('/blog/blog/'+str(blog_id))
     else:
         return render(request, 'edit.html', {"blog": blog})
-        
+
 def delete(request, blog_id):
     blog_detail = Blog.objects.get(id=blog_id)
     blog_detail.delete()
