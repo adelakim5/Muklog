@@ -9,7 +9,7 @@ from django.conf import settings
 
 
 def write(request):
-    return render(request, 'write.html', {"naver_client_id": settings.NAVER_CLIENT_ID})
+    return render(request, 'write.html', {"STATIC_URL": settings.STATIC_URL, "naver_client_id": settings.NAVER_CLIENT_ID})
 
 
 def tempHome(request):
@@ -30,6 +30,8 @@ def create(request):
     blog.title = request.POST['title']
     blog.body = request.POST['body']
     thumbnail = request.FILES.get('image')
+    blog.latitude = float(request.POST['lat'])
+    blog.longtitude = float(request.POST['lng'])
     if thumbnail != None:
         blog.thumbnail = thumbnail
     # blog.latitude = request.POST['latitude']
@@ -64,6 +66,7 @@ def edit(request, blog_id):
         return redirect('/blog/blog/'+str(blog_id))
     else:
         return render(request, 'edit.html', {"blog": blog})
+
 
 def delete(request, blog_id):
     blog_detail = Blog.objects.get(id=blog_id)

@@ -17,7 +17,9 @@
     <form method='post' action="{% url 'create' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <h4>title: </h4>
-        <input type="text" name="title">
+        <input type="text" name="title" />
+        <br>
+        <input type="text" name="place" id="place-input" />
         <br>
         <br>
         <h4>body: </h4>
@@ -29,50 +31,46 @@
         <input type="file" name="image" id="imageUpload" accept="media/*">
         <input type="submit" value="submit">
     </form>
-</div>
-<!-- 
-<script>
-    let searchInput = document.getElementById("search");
-    let searchBtn = document.getElementById("search-btn");
-    let searchList = document.getElementById("search-list");
-    let latInput = document.getElementById("map-lat");
-    let lngInput = document.getElementById("map-lng");
+</div> 
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}&submodules=geocoder"></script>
+<script type="module">
+    import SearchMap from "../static/blog/js/SearchMap.js"
     
-    searchBtn.addEventListener('click',(e) => search(e));
-    function search(e){
-        naver.maps.Service.geocode({
-        query: searchInput.value,
-        }, function(status, response) {
-            if (status !== naver.maps.Service.Status.OK) {
-                return alert('Something wrong!');
-            }
+    const staticUrl = "{{ STATIC_URL }}"
+    const searchList = document.getElementById("search-list");
+    const searchInput = document.getElementById("search");
+    const searchBtn = document.getElementById("search-btn");
+    
+    const placeInput = document.getElementById("place-input");
+    const mapLat = document.getElementById("map-lat");
+    const mapLng = document.getElementById("map-lng");
 
-            var result = response.v2, // 검색 결과의 컨테이너
-                {addresses} = result; // 검색 결과의 배열
-            // console.log(addresses)
-            setList(addresses);
-        });
-    }
+    const searchMap = new SearchMap(staticUrl,searchList,mapLat,mapLng);
 
-    function setList(items){
-        items.forEach(e => {
-            let {roadAddress,x,y} = e;
-            let el = document.createElement('div');
-            el.innerHTML = `
-                <h4>${roadAddress}</h4>
-                <span>lat : ${y}</span>
-                <span>lng : ${x}</span>
-            `
-            el.addEventListener('click', () => setPosition(y,x))
-            searchList.appendChild(el);
-        })
-    }
 
-    function setPosition(lat,lng){
-        latInput.value = lat;
-        lngInput.value = lng;    
-    }
+    searchMap.render();
+    searchMap.setClickListener(mapLat,mapLng,placeInput);
+    searchBtn.addEventListener("click",(event) => searchMap.searchPlaces(searchInput.value,searchList,mapLat,mapLng,placeInput));
+
+    /*
+    var position = new naver.maps.LatLng(37.3595704, 127.105399);
+    var map = new naver.maps.Map('naver-map', {
+        center: position,
+        zoom: 15
+    });
+
+    var marker = new naver.maps.Marker({
+        position: position,
+        map: map
+    });
+    console.log(naver.maps.Event.addListener)
+    naver.maps.Event.addListener(map, 'click', function(e) {
+        marker.setPosition(e.coord);
+    });
+    */
     
 </script>
-<-->
 {% endblock %}

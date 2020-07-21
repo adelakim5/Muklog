@@ -17,8 +17,20 @@
 {% block javascript %}
   <script type="module"> 
     import ClusteredMap from "../static/map/js/ClusteredMap.js";  
-    // const mukLogs = {{ muk_logs }};
-    const mukLogs = [{title:"한남대 놀숲",latitude:36.3509288,longitude:127.4256322}]
+    const mukLogs = [];
+    let logs = null;
+
+    {% for muk_log in muk_logs %}
+    logs = {
+      title:"{{ muk_log.title }}",
+      summary:"{{ muk_log.summary }}",
+      latitude:"{{ muk_log.latitude }}",
+      longitude:"{{ muk_log.longtitude }}",
+      address:"{{ muk_log.address }}",
+    }
+    mukLogs.push(logs);
+    {% endfor %}
+
     const staticUrl = "{{ STATIC_URL }}";
     const clusteredMap = new ClusteredMap(staticUrl);
     clusteredMap.render();
