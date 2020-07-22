@@ -9,11 +9,11 @@ class NaverMap {
     this.userPositionMarker = null;
   }
 
-  initMap(position = null) {
+  initMap(position = null, zoom = 14) {
     const { latitude, longitude } = DEFAULT_LOCATION;
     this.map = new naver.maps.Map("naver-map", {
       center: new naver.maps.LatLng(latitude, longitude),
-      zoom: 14,
+      zoom,
     });
     this.userPositionMarker = new Marker(DEFAULT_LOCATION, this.map);
     this.userPositionMarker.setInfo("현재위치");

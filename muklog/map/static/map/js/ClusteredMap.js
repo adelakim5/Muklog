@@ -1,23 +1,23 @@
 import NaverMap from "../../shared/js/NaverMap.js";
 import { getClusterImg } from "../../shared/js/shared.js";
 import { MarkerClustering } from "../../shared/js/markerCluster.js";
-import Marker from "../../shared/js/marker.js";
+import LogMarker from "../js/LogMarker.js";
 
 class ClusteredMap extends NaverMap {
-  constructor(staticUrl) {
+  constructor(staticUrl, sidePost) {
     super(staticUrl);
+    this.sidePost = sidePost;
   }
 
   setClustering(mukLogs) {
-    console.log(mukLogs);
     this.markers = [];
     mukLogs.forEach((muklog) => {
       const position = {
         latitude: muklog.latitude,
         longitude: muklog.longitude,
       };
-      const marker = new Marker(position, this.map);
-      marker.setInfo(`<div>${muklog.title}</div>`);
+      const marker = new LogMarker(position, muklog, this.map, this.sidePost);
+      marker.setLogInfo();
       this.markers.push(marker.marker);
     });
 
