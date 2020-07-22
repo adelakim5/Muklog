@@ -19,7 +19,7 @@
         <h4>title: </h4>
         <input type="text" name="title" />
         <br>
-        <input type="text" name="place" id="place-input" />
+        <input type="text" name="address" id="place-input" />
         <br>
         <br>
         <h4>body: </h4>
@@ -54,23 +54,6 @@
     searchMap.render();
     searchMap.setClickListener(mapLat,mapLng,placeInput);
     searchBtn.addEventListener("click",(event) => searchMap.searchPlaces(searchInput.value,searchList,mapLat,mapLng,placeInput));
-
-    /*
-    var position = new naver.maps.LatLng(37.3595704, 127.105399);
-    var map = new naver.maps.Map('naver-map', {
-        center: position,
-        zoom: 15
-    });
-
-    var marker = new naver.maps.Marker({
-        position: position,
-        map: map
-    });
-    console.log(naver.maps.Event.addListener)
-    naver.maps.Event.addListener(map, 'click', function(e) {
-        marker.setPosition(e.coord);
-    });
-    */
     
 </script>
 {% endblock %}

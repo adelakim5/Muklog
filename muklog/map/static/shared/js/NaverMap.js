@@ -9,7 +9,7 @@ class NaverMap {
     this.userPositionMarker = null;
   }
 
-  initMap() {
+  initMap(position = null) {
     const { latitude, longitude } = DEFAULT_LOCATION;
     this.map = new naver.maps.Map("naver-map", {
       center: new naver.maps.LatLng(latitude, longitude),
@@ -18,10 +18,17 @@ class NaverMap {
     this.userPositionMarker = new Marker(DEFAULT_LOCATION, this.map);
     this.userPositionMarker.setInfo("현재위치");
 
-    this.setCenterMap();
+    this.setCenterMap(position);
   }
 
-  setCenterMap() {
+  setCenterMap(position = null) {
+    if (position) {
+      const { latitude, longitude } = position;
+      const latLng = new naver.maps.LatLng(latitude, longitude);
+      this.map.setCenter(latLng);
+      this.userPositionMarker.changePosition(latLng);
+      return;
+    }
     const successCallback = (position) => {
       const { latitude, longitude } = position.coords;
       const latLng = new naver.maps.LatLng(latitude, longitude);
@@ -50,8 +57,8 @@ class NaverMap {
     );
   }
 
-  render() {
-    this.initMap();
+  render(position = null) {
+    this.initMap(position);
   }
 }
 
