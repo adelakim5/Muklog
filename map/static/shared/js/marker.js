@@ -11,7 +11,7 @@ class Marker {
   setInfo(content) {
     this.info = new naver.maps.InfoWindow({ content });
 
-    let listener = naver.maps.Event.addDOMListener(
+    const listener = naver.maps.Event.addDOMListener(
       this.marker.getElement(),
       "click",
       () => {
