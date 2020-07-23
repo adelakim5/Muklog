@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+#naver-map {
+  width: 99vw;
+  height: 99vh;
+}
+
+#side-post {
+  display: flex;
+  flex-direction: row;
+  /* visibility:hidden; */
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  background-color: white;
+}
+
+#side-post .arrow-div {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  height: 100%;
+  font-size: 30px;
+}
+
+#side-post .side-post-container {
+  width: 0;
+  height: 0;
+  transition: width 0.5s;
+}
+#side-post .side-post-container-active {
+  width: 40vw;
+  height: 100%;
+  transition: width 0.5s;
+}

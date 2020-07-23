@@ -23,6 +23,9 @@ def signup(request):
 
 
 def login(request):
+    next = request.GET.get("next")
+    if next == None or next == '':
+        next = "tempHome"
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -35,7 +38,6 @@ def login(request):
         else:
             return render(request, 'login.html', {'error': 'username or password is incorrect'})
     else:
-        next = request.GET['next']
         return render(request, 'login.html', {"next": next})
 
 
@@ -50,9 +52,11 @@ def updateInfo(request, user_id):
     if request.method == "POST":
         if request.POST['newPassword'] == request.POST['newPassword2']:
             user = User.objects.get(username=request.user)
-            user.password = request.POST['newPassword']
+            password = request.POST['newPassword']
+            user.set_password(password)
             user.save()
-            return redirect('/accounts/' + str(user_id))
+            auth.login(request,user)
+            return redirect(reverse("mypage",args=[user_id]))
         else:
             messages.error(request, 'password is incorrect')
             return redirect('/accounts/' + str(user_id))
@@ -66,6 +70,7 @@ def deleteInfo(request):
         deleted_user.delete()
         return redirect('/blog/')
     except Exception:
-        return render(request, 'myPage.html', {'error': '탈퇴 실패'})
+        return render(request, 'mypage.html', {'error': '탈퇴 실패'})
     return render(request, 'tempHome.html')
+
     
