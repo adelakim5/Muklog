@@ -1,9 +1,14 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.conf import settings
+from blog.models import Blog
+
 
 # Create your views here.
 
 
 def home(request):
-    naver_client_id = settings.NAVER_CLIENT_ID
-    return render(request, 'home.html', {"STATIC_URL": settings.STATIC_URL, "naver_client_id": naver_client_id, "muk_logs": [1, 2, 3, 4]})
+    muk_logs = Blog.objects.all().filter(user=request.user)
+    context = {"muk_logs": muk_logs, "STATIC_URL": settings.STATIC_URL,
+               "naver_client_id": settings.NAVER_CLIENT_ID}
+    return HttpResponse(render(request, "home.html", context))

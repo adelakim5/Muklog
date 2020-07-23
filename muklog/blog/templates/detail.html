@@ -1,4 +1,14 @@
+{% extends "mapTemplate.html" %}
 {% load static %}
+
+{% block content %}
+<style>
+    #naver-map {
+      width: 500px;
+      height: 500px;
+    }
+</style>
+<div id="naver-map"></div>
 <h1>{{ detail.title }}</h1>
 {% if detail.thumbnail %}
 <img src="{{detail.thumbnail.url}}" alt="thumbnail" width='600'>
@@ -10,3 +20,17 @@
 <a href="{% url 'edit' detail.id %}">수정하기</a>
 <a href="{% url 'delete' detail.id %}">삭제하기</a>
 <a href="{% url 'tempHome' %}">임시홈으로 돌아가기</a>
+{% endblock %}
+
+{% block javascript %}
+<script type="module">
+    import NaverMap from "/static/shared/js/NaverMap.js"
+
+    const staticUrl = "{{ STATIC_URL }}";
+    const latitude = parseFloat("{{ detail.latitude }}");
+    const longitude = parseFloat("{{ detail.longtitude }}");
+
+    const naverMap = new NaverMap(staticUrl);
+    naverMap.render({latitude,longitude})
+</script>
+{% endblock %}
