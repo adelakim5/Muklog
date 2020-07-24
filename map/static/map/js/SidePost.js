@@ -60,13 +60,27 @@ class SidePost {
   setMukLogsContent() {
     const contents = document.createElement("div");
     this.muklogs.forEach((muklog) => {
-      const { id, title, summary, address } = muklog;
+      const { id, title, summary, address, thumbnail, pubDate } = muklog;
       const inner = document.createElement("div");
 
       inner.innerHTML = `
-          <a href="/blog/blog/${id}"><div>${title}</div></a>
-          <div>${address}</div>
-          <div>${summary}...</div>
+          <a href="/blog/blog/${id}">
+            <div class="side-post-list-item">
+              <div class="side-post-list-item-thumbnail">
+                <img src="${thumbnail}" alt="thumbnail" />
+              </div>
+              <div class="side-post-list-item-content">
+                <div class="header">
+                  <div class="date">${pubDate}</div>
+                  <div class="title">${title}</div>
+                  <div class="address">${address}</div>
+                </div>
+                <div class="body">
+                  ${summary}
+                </div>
+              </div>
+            </div>
+          </a>
       `;
       contents.appendChild(inner);
     });

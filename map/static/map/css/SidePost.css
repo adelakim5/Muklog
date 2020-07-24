@@ -5,16 +5,6 @@
   overflow-y: scroll;
 }
 
-.side-post-content-container a {
-  color: black;
-  text-decoration: none;
-}
-
-.side-post-content-container a:hover {
-  color: #a9a9a9;
-  text-decoration: underline;
-}
-
 .side-post-content-thumbnail {
   width: 100%;
 }
@@ -34,4 +24,67 @@
   font-size: 1.2rem;
 }
 .side-post-content-body {
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.side-post-list-item {
+  display: flex;
+  flex-direction: row;
+  width: 40vw;
+  min-height: 250px;
+  animation: fade-in 2s;
+  -webkit-animation: fade-in 2s;
+}
+
+.side-post-list-item-thumbnail {
+  display: flex;
+  width: 100%;
+  flex: 2;
+}
+
+.side-post-list-item-thumbnail img {
+  width: 100%;
+}
+
+.side-post-list-item-content {
+  flex: 3;
+}
+
+.side-post-list-item-content .header {
+  padding: 1rem 1rem;
+}
+.side-post-list-item-content .header div {
+  margin-bottom: 0.5rem;
+}
+
+.side-post-list-item-content .header .date {
+  font-size: 0.5rem;
+  color: #b8b8b8;
+}
+.side-post-list-item-content .header .title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.side-post-list-item-content .header .address {
+  font-size: 0.8rem;
+}
+.side-post-list-item-content .body {
+  padding: 0 1rem;
 }
