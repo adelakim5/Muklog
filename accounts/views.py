@@ -23,9 +23,9 @@ def signup(request):
 
 
 def login(request):
-    next = request.GET.get("next")
+    next = request.GET.get('next')
     if next == None or next == '':
-        next = "tempHome"
+        next = 'tempHome'
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -68,7 +68,8 @@ def deleteInfo(request):
     try:
         deleted_user = User.objects.all().filter(username=request.user)
         deleted_user.delete()
-        return redirect('/blog/')
+        auth.logout(request, request.user)
+        return redirect('/')
     except Exception:
         return render(request, 'mypage.html', {'error': '탈퇴 실패'})
     return render(request, 'tempHome.html')

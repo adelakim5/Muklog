@@ -1,7 +1,5 @@
-{% extends 'accountsBase.html' %}
-{% load static %}
-
-{% block content %}
+{% extends 'accountsBase.html' %} {% load static %} {% block title %} Muklog |
+tempHome {% endblock %} {% block css %} {% endblock %} {% block content %}
 
 <main>
   {% if user.is_authenticated %}
@@ -11,16 +9,16 @@
     {{ message }}
     {% endfor %}
     {% endif %} -->
-  {% if error %}
-  {{ error }}
-  {% endif %}
+  {% if error %} {{ error }} {% endif %}
   <div>
-    {% if blogs %}
-    {% for blog in blogs %}
-    {% if blog.thumbnail %}
-    <img src="{{ blog.thumbnail.url }}" alt="thumbnail" width="600"/>
+    {% if blogs %} {% for blog in blogs %} {% if blog.thumbnail %}
+    <img src="{{ blog.thumbnail.url }}" alt="thumbnail" width="600" />
     {% else %}
-    <img src="{% static '/shared/image/default.jpg' %}" width=600 alt="default-thumbnail" />
+    <img
+      src="{% static '/shared/image/default.jpg' %}"
+      width="600"
+      alt="default-thumbnail"
+    />
     {% endif %}
 
     <h1>{{ blog.title }}</h1>
@@ -30,7 +28,9 @@
     <a href="{% url 'edit' blog.id %}">수정하기</a>
     <a href="{% url 'delete' blog.id %}">삭제하기</a>
     <hr />
-    {% endfor %}
+    {% endfor %} {% else %}
+    <p>write를 눌러 첫 글을 등록해주세요.</p>
+
     {% endif %}
   </div>
   {% endif %}
