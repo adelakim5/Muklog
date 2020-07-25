@@ -1,62 +1,70 @@
-{% extends "mapTemplate.html" %}
+{% extends "mapTemplate.html" %} 
 {% load static %}
 
-{% block content %}
-<style>
-#naver-map{
-    width:500px;
-    height:500px;
-}
-</style>
-<div id="naver-map"></div>
-<div>
-    <input type="text" id="search" value="">
-    <button id="search-btn">검색</button>
-    <div id="search-list">
-    </div>
-    <form method='post' action="{% url 'create' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h4>title: </h4>
-        <input type="text" name="title" />
-        <br>
-        <input type="text" name="address" id="place-input" />
-        <br>
-        <br>
-        <h4>body: </h4>
-        <textarea cols="40" rows="10" name="body"></textarea>
-        <br>
-        <br>
-        <input type="text" name="lat" id="map-lat" value="">
-        <input type="text" name="lng" id="map-lng" value="">
-        <input type="file" name="image" id="imageUpload" accept="media/*">
-        <input type="submit" value="submit">
-    </form>
-
-    <a href="{% url 'home' %}">맵홈으로 돌아가기</a>
-    <a href="{% url 'tempHome' %}">임시홈으로 돌아가기</a>
-</div> 
+{% block title %} 
+ Muklog | Write
 {% endblock %}
 
-{% block javascript %}
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}&submodules=geocoder"></script>
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/map.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div id="naver-map"></div>
+<div>
+  <input type="text" id="search" value="" />
+  <button id="search-btn">검색</button>
+  <div id="search-list"></div>
+  <form method="post" action="{% url 'create' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h4>title:</h4>
+    <input type="text" name="title" />
+    <br />
+    <input type="text" name="address" id="place-input" />
+    <br />
+    <br />
+    <h4>body:</h4>
+    <textarea cols="40" rows="10" name="body"></textarea>
+    <br />
+    <br />
+    <input type="text" name="lat" id="map-lat" value="" />
+    <input type="text" name="lng" id="map-lng" value="" />
+    <input type="file" name="image" id="imageUpload" accept="media/*" />
+    <input type="submit" value="submit" />
+  </form>
+
+  <a href="{% url 'home' %}">맵홈으로 돌아가기</a>
+  <a href="{% url 'tempHome' %}">임시홈으로 돌아가기</a>
+</div>
+{% endblock %} {% block javascript %}
+<script
+  type="text/javascript"
+  src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}&submodules=geocoder"
+></script>
 <script type="module">
-    import SearchMap from "../static/blog/js/SearchMap.js"
-    
-    const staticUrl = "{{ STATIC_URL }}"
-    const searchList = document.getElementById("search-list");
-    const searchInput = document.getElementById("search");
-    const searchBtn = document.getElementById("search-btn");
-    
-    const placeInput = document.getElementById("place-input");
-    const mapLat = document.getElementById("map-lat");
-    const mapLng = document.getElementById("map-lng");
+  import SearchMap from "../static/blog/js/SearchMap.js";
 
-    const searchMap = new SearchMap(staticUrl,searchList,mapLat,mapLng);
+  const staticUrl = "{{ STATIC_URL }}";
+  const searchList = document.getElementById("search-list");
+  const searchInput = document.getElementById("search");
+  const searchBtn = document.getElementById("search-btn");
 
+  const placeInput = document.getElementById("place-input");
+  const mapLat = document.getElementById("map-lat");
+  const mapLng = document.getElementById("map-lng");
 
-    searchMap.render();
-    searchMap.setClickListener(mapLat,mapLng,placeInput);
-    searchBtn.addEventListener("click",(event) => searchMap.searchPlaces(searchInput.value,searchList,mapLat,mapLng,placeInput));
-    
+  const searchMap = new SearchMap(staticUrl, searchList, mapLat, mapLng);
+
+  searchMap.render();
+  searchMap.setClickListener(mapLat, mapLng, placeInput);
+  searchBtn.addEventListener("click", (event) =>
+    searchMap.searchPlaces(
+      searchInput.value,
+      searchList,
+      mapLat,
+      mapLng,
+      placeInput
+    )
+  );
 </script>
 {% endblock %}
