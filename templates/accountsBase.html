@@ -14,48 +14,49 @@
 
 <body>
     <div class="nav">
-
         {% if user.is_authenticated %}
         <!-- left -->
-        <a href={% url 'write' %}>
-            <div class="nav-items nav-left">
+        <div class="nav-left">
+            <a href={% url 'write' %}>
                 <img src="{% static 'shared/image/plus.png' %}" alt="write">
-            </div>
-        </a>
+            </a>
+        </div>
+
         <!-- title -->
-        <div class="nav-items title">
-            <h4>Muklog</h4>
+        <div class="nav-center">
+            <a href="{% url 'home' %}">Muklog</a>
         </div>
+
         <!-- right -->
-        <div class="nav-items right">
-            <div class="nav-right">
-                <a href={% url 'mypage' user.username %}>
-                    {{request.user}}님
-                </a>
-            </div>
-            <div class="nav-right">
-                <a href={% url 'logout' %}?next={{request.path}}>
-                    <img src="{% static 'shared/image/logout.png' %}" alt="logout">
-                </a>
-            </div>
+        <div class="nav-right">
+            <a href={% url 'logout' %}?next={{request.path}}>
+                <img src="{% static 'shared/image/logout.png' %}" alt="logout">
+            </a>
+            <a href={% url 'mypage' user.username %}>
+                <img src="{% static 'shared/image/user.png' %}" alt="user">
+            </a>
         </div>
+
         {% else %}
-        <div class="nav-items right">
+
+        <!-- title -->
+        <div class="nav-center">
+            <a href="{% url 'home' %}">Muklog</a>
+        </div>
+
+        <div class="nav-right">
             <a href={% url 'login' %}?next={{request.path}}>
-                <div class="nav-right">
-                    <img src="{% static 'shared/image/login.png' %}" alt="login">
-                </div>
+                <img src="{% static 'shared/image/login.png' %}" alt="login">
             </a>
             <a href={% url 'signup' %}?next={{request.path}}>
-                <div class="nav-right">
-                    <p>회원가입 고!</p>
-                </div>
+                JOIN
             </a>
         </div>
-        {% endif %}
-    </div>
-    <!-- <p>로그인하여 글을 작성해주세요.</p> -->
 
+        {% endif %}
+
+    </div>
+    
     {% block content %}
     {% endblock %}
 </body>

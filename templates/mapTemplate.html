@@ -2,38 +2,68 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="{% static 'shared/css/reset.css' %}">
-    {% block css %}
-    {% endblock %}
-    <title>{% block title %}{% endblock %}</title>
-  </head>
-  <body>
-    {% if user.is_authenticated %}
 
-    <a href={% url 'write' %}>write~</a>
-    <a href={% url 'logout' %}?next={{request.path}}>logout~</a>
-    <span>{{request.user}}님</span>
-    <a href={% url 'mypage' user.username %}>마이페이지</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="{% static 'shared/css/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'shared/css/navbar.css' %}">
+  {% block css %}
+  {% endblock %}
+  <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+  <div class="nav">
+    {% if user.is_authenticated %}
+    <!-- left -->
+    <div class="nav-left">
+      <a href={% url 'write' %}>
+        <img src="{% static 'shared/image/plus.png' %}" alt="write">
+      </a>
+    </div>
+
+    <!-- title -->
+    <div class="nav-center">
+      <a href="{% url 'tempHome' %}">Muklog</a>
+    </div>
+    <!-- right -->
+    <div class="nav-right">
+      <a href={% url 'logout' %}?next={{request.path}}>
+        <img src="{% static 'shared/image/logout.png' %}" alt="logout">
+      </a>
+      <a href={% url 'mypage' user.username %}>
+        <img src="{% static 'shared/image/user.png' %}" alt="user">
+      </a>
+    </div>
 
     {% else %}
 
-    <a href={% url 'login' %}?next={{request.path}}>login~</a>
-    <a href={% url 'signup' %}?next={{request.path}}>회원가입 고!</a>
-    <p>로그인하여 글을 작성해주세요.</p>
+    <!-- title -->
+    <div class="nav-center">
+      <a href="{% url 'tempHome' %}">Muklog</a>
+    </div>
+
+    <div class="nav-right">
+      <a href={% url 'login' %}?next={{request.path}}>
+        <img src="{% static 'shared/image/login.png' %}" alt="login">
+      </a>
+      <a href={% url 'signup' %}?next={{request.path}}>
+        JOIN
+      </a>
+    </div>
 
     {% endif %}
-    <!-- body content -->
-    {% block content %} 
-    {% endblock %}
-    
-    <script
-      type="text/javascript"
-      src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}"
-    ></script>
-    {% block javascript %}
-    {% endblock %}
-  </body>
+
+  </div>
+  <!-- body content -->
+  {% block content %}
+  {% endblock %}
+
+  <script type="text/javascript"
+    src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}"></script>
+  {% block javascript %}
+  {% endblock %}
+</body>
+
 </html>

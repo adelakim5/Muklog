@@ -25,7 +25,7 @@ def signup(request):
 def login(request):
     next = request.GET.get('next')
     if next == None or next == '':
-        next = 'tempHome'
+        next = 'home'
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -43,7 +43,7 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/blog')
+    return HttpResponseRedirect('/map')
 
 def mypage(request, user_id):
     return render(request, 'mypage.html')

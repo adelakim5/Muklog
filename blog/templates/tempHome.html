@@ -6,43 +6,46 @@ Muklog | tempHome
 {% endblock %}
 
 {% block css %}
+<link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<main>
-  {% if user.is_authenticated %}
-  <!-- {% if messages %}
-    {% for message in messages %}
-    {{ message.tags }}
-    {{ message }}
-    {% endfor %}
+<!-- {% if user.is_authenticated %} -->
+
+<!-- {% if error %}
+    {{ error }}
     {% endif %} -->
-  {% if error %}
-  {{ error }}
-  {% endif %}
-  <div>
-    {% if blogs %}
-    {% for blog in blogs %}
-    {% if blog.thumbnail %}
-    <img width="600" src="{{ blog.thumbnail.url }}" alt="image" />
-    {% endif %}
 
-    <h1>{{ blog.title }}</h1>
-    <p>{{blog.pub_date}}</p>
-    <p>{{ blog.summary }}</p>
-    <a href="{% url 'detail' blog.id %}">더보기</a>
-    <a href="{% url 'edit' blog.id %}">수정하기</a>
-    <a href="{% url 'delete' blog.id %}">삭제하기</a>
-    <hr />
-    {% endfor %}
-
-    {% else %}
-    <p>write를 눌러 첫 글을 등록해주세요.</p>
-
-    {% endif %}
+<div class="posts">
+  {% if blogs %}
+  {% for blog in blogs %}
+  <div class="card">
+    <div class="opening">
+      <h1>{{ blog.title }}</h1>
+      <p>발행일: {{blog.pub_date}}</p>
+    </div>
+    <div class="thumbnail">
+      {% if blog.thumbnail %}
+      <img src="{{ blog.thumbnail.url }}" alt="image" />
+      {% endif %}
+    </div>
+    <p class="sum">{{ blog.summary }}</p>
+    <div class="others">
+      <a href="{% url 'detail' blog.id %}">더보기</a>
+      <a href="{% url 'edit' blog.id %}">수정하기</a>
+      <a href="{% url 'delete' blog.id %}">삭제하기</a>
+    </div>
   </div>
+  <!-- <hr /> -->
+  {% endfor %}
+
+  {% else %}
+  <p>write를 눌러 첫 글을 등록해주세요.</p>
+
   {% endif %}
-</main>
+</div>
+<!-- {% endif %} -->
+
 
 {% endblock %}
