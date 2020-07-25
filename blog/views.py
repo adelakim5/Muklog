@@ -16,9 +16,9 @@ def tempHome(request):
     user = request.user
     if user.is_authenticated:
         blogs = Blog.objects.all().filter(user=user)
-        isBlogs = {'blogs':blogs}
+        context = {'blogs':blogs}
         try:
-            return render(request, 'tempHome.html', isBlogs)
+            return render(request, 'tempHome.html', context)
         except Blog.DoesNotExist:
             return render(request, 'tempHome.html', {'error':'Blog does not exist'})
     return render(request, 'tempHome.html')

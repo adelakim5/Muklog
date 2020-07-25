@@ -28,6 +28,10 @@
     <a href="{% url 'delete' blog.id %}">삭제하기</a>
     <hr />
     {% endfor %}
+
+    {% else %}
+    <p>write를 눌러 첫 글을 등록해주세요.</p>
+
     {% endif %}
   </div>
   {% endif %}

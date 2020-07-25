@@ -23,6 +23,9 @@ def signup(request):
 
 
 def login(request):
+    next = request.GET.get('next')
+    if next == None:
+        next = 'tempHome'
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -35,7 +38,6 @@ def login(request):
         else:
             return render(request, 'login.html', {'error': 'username or password is incorrect'})
     else:
-        next = request.GET['next']
         return render(request, 'login.html', {"next": next})
 
 
@@ -64,7 +66,8 @@ def deleteInfo(request):
     try:
         deleted_user = User.objects.all().filter(username=request.user)
         deleted_user.delete()
-        return redirect('/blog/')
+        auth.logout(request, request.user)
+        return redirect('/')
     except Exception:
         return render(request, 'myPage.html', {'error': '탈퇴 실패'})
     return render(request, 'tempHome.html')
