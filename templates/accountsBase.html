@@ -1,30 +1,62 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'shared/css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'shared/css/navbar.css' %}">
+    {% block css %}
+    {% endblock %}
+    <title>{% block title %}{% endblock %}</title>
 </head>
 
 <body>
-    {% if user.is_authenticated %}
+    <div class="nav">
 
-    <a href={% url 'write' %}>write~</a>
-    <a href={% url 'logout' %}?next={{request.path}}>logout~</a>
-    <span>{{request.user}}님</span>
-    <a href={% url 'mypage' user.username %}>마이페이지</a>
-
-    {% else %}
-
-    <a href={% url 'login' %}?next={{request.path}}>login~</a>
-    <a href={% url 'signup' %}?next={{request.path}}>회원가입 고!</a>
-    <p>로그인하여 글을 작성해주세요.</p>
-
-    {% endif %}
+        {% if user.is_authenticated %}
+        <!-- left -->
+        <a href={% url 'write' %}>
+            <div class="nav-items nav-left">
+                <img src="{% static 'shared/image/plus.png' %}" alt="write">
+            </div>
+        </a>
+        <!-- title -->
+        <div class="nav-items title">
+            <h4>Muklog</h4>
+        </div>
+        <!-- right -->
+        <div class="nav-items right">
+            <div class="nav-right">
+                <a href={% url 'mypage' user.username %}>
+                    {{request.user}}님
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href={% url 'logout' %}?next={{request.path}}>
+                    <img src="{% static 'shared/image/logout.png' %}" alt="logout">
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <div class="nav-items right">
+            <a href={% url 'login' %}?next={{request.path}}>
+                <div class="nav-right">
+                    <img src="{% static 'shared/image/login.png' %}" alt="login">
+                </div>
+            </a>
+            <a href={% url 'signup' %}?next={{request.path}}>
+                <div class="nav-right">
+                    <p>회원가입 고!</p>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    <!-- <p>로그인하여 글을 작성해주세요.</p> -->
 
     {% block content %}
-
     {% endblock %}
 </body>
 
