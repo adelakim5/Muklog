@@ -1,62 +1,83 @@
-{% extends 'mapTemplate.html' %}
-{% load static %}
+{% extends 'mapTemplate.html' %} 
+{% load static %} 
 
 {% block title %}
-Home | Map
-{% endblock %}
+ Muklog | Home
+{% endblock %} 
 
 {% block css %}
-  <link rel="stylesheet" type="text/css" href="{% static 'map/css/home.css' %}" />
-  <link rel="stylesheet" type="text/css" href="{% static 'map/css/LogMarker.css' %}" />
-  <link rel="stylesheet" type="text/css" href="{% static 'map/css/SidePost.css' %}" />
-{% endblock %}
+<link rel="stylesheet" type="text/css" href="{% static 'map/css/home.css' %}" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'map/css/LogMarker.css' %}"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'map/css/SidePost.css' %}"
+/>
+{% endblock %} 
 
 {% block content %}
+<<<<<<< HEAD
   <!-- <a href="{% url 'tempHome' %}">임시홈</a> -->
   <div class="container">
     <div id="naver-map">
       <div id="side-post">
         <div class="side-post-container"></div>
         <div class="arrow-div">></div>
+=======
+<a href="{% url 'tempHome' %}">임시홈</a>
+<div class="container">
+  <div id="naver-map">
+    <div id="side-post">
+      <div class="side-post-container"></div>
+      <div class="arrow-div">
+        <img
+          src="/static/shared/image/arrow-forward-outline.svg"
+          width="24"
+          height="24"
+        />
+>>>>>>> a976fb34dc5753383848ae897257201734ab9ed6
       </div>
     </div>
   </div>
-{% endblock %}
+</div>
+{% endblock %} {% block javascript %}
+<script type="module" src="{% static 'map/js/SidePost.js' %}"></script>
+<script type="module">
+  import ClusteredMap from "../static/map/js/ClusteredMap.js";
+  import SidePost from "../static/map/js/SidePost.js";
 
-{% block javascript %}
-  <script type="module" src="{% static 'map/js/SidePost.js' %}"></script>
-  <script type="module"> 
-    import ClusteredMap from "../static/map/js/ClusteredMap.js";
-    import SidePost from "../static/map/js/SidePost.js";
+  const isLoggedIn = `{{ user.is_authenticated }}` === "True" ? true : false;
+  const mukLogs = [];
+  let logs = null;
 
-    const isLoggedIn = `{{ user.is_authenticated }}` === "True" ? true : false;
-    const mukLogs = [];
-    let logs = null;
-
-    {% for muk_log in muk_logs %}
-    logs = {
-      id:`{{ muk_log.id }}`,
-      title:`{{ muk_log.title }}`,
-      summary:`{{ muk_log.summary }}`,
-      body:`{{ muk_log.body }}`,
-      latitude:`{{ muk_log.latitude }}`,
-      longitude:`{{ muk_log.longtitude }}`,
-      address:`{{ muk_log.address }}`,
-      pubDate:`{{ muk_log.pub_date }}`,
-      {% if muk_log.thumbnail %}
-      thumbnail:`{{ muk_log.thumbnail.url }}`,
-      {% else %}
-      thumbnail:`/static/shared/image/default_food.jpg`,
-      thumbnailSide:`/static/image/default.jpg`,
-      {% endif %}
-    }
-    mukLogs.push(logs);
-    {% endfor %}
-    console.log(mukLogs);
-    const staticUrl = "{{ STATIC_URL }}";
-    const sidePost = new SidePost(document.getElementById("side-post"),mukLogs,isLoggedIn);
-    const clusteredMap = new ClusteredMap(staticUrl,sidePost,isLoggedIn);
-    clusteredMap.render();
-    clusteredMap.setClustering(mukLogs);
-  </script>
+  {% for muk_log in muk_logs %}
+  logs = {
+    id:`{{ muk_log.id }}`,
+    title:`{{ muk_log.title }}`,
+    summary:`{{ muk_log.summary }}`,
+    body:`{{ muk_log.body }}`,
+    latitude:`{{ muk_log.latitude }}`,
+    longitude:`{{ muk_log.longtitude }}`,
+    address:`{{ muk_log.address }}`,
+    pubDate:`{{ muk_log.pub_date }}`,
+    {% if muk_log.thumbnail %}
+    thumbnail:`{{ muk_log.thumbnail.url }}`,
+    {% else %}
+    thumbnail:`/static/shared/image/default_food.jpg`,
+    thumbnailSide:`/static/image/default.jpg`,
+    {% endif %}
+  }
+  mukLogs.push(logs);
+  {% endfor %}
+  console.log(mukLogs);
+  const staticUrl = "{{ STATIC_URL }}";
+  const sidePost = new SidePost(document.getElementById("side-post"),mukLogs,isLoggedIn);
+  const clusteredMap = new ClusteredMap(staticUrl,sidePost,isLoggedIn);
+  clusteredMap.render();
+  clusteredMap.setClustering(mukLogs);
+</script>
 {% endblock %}
