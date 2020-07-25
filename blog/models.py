@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
-    thumbnail = models.ImageField(upload_to='images', default='default.jpg', null=True, blank=True)
+    thumbnail = models.ImageField(upload_to='images', null=True, blank=True)
     body = models.TextField()
     latitude = models.FloatField(blank=True, default=0)
     longtitude = models.FloatField(blank=True, default=0)

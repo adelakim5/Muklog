@@ -4,9 +4,10 @@ import { MarkerClustering } from "../../shared/js/markerCluster.js";
 import LogMarker from "../js/LogMarker.js";
 
 class ClusteredMap extends NaverMap {
-  constructor(staticUrl, sidePost) {
+  constructor(staticUrl, sidePost, isLoggedIn) {
     super(staticUrl);
     this.sidePost = sidePost;
+    this.isLoggedIn = isLoggedIn;
   }
 
   setClustering(mukLogs) {

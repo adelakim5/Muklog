@@ -7,7 +7,7 @@ urlpatterns = [
     path('login/', accounts.login, name="login"),
     path('logout/', accounts.logout, name="logout"),
     # path('', auth_views.auth_login.as_view(template_name="login.html")),
-    path('<user_id>/', accounts.mypage, name="mypage"),
-    path('updateInfo/<user_id>', accounts.updateInfo, name="updateInfo"),
-    path('deleteInfo/', accounts.deleteInfo, name="deleteInfo"),
+    path('<str:user_id>/', accounts.mypage, name="mypage"),
+    path('updateInfo/<str:user_id>/', accounts.updateInfo, name="updateInfo"),
+    path("delete", accounts.deleteInfo, name="deleteInfo"),
 ]

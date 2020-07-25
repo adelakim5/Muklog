@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.info-container {
+  width: 300px;
+  height: 400px;
+}
+
+.info-container .info-thumbnail img {
+  width: 100%;
+}
+
+.info-container .info-header {
+  padding: 0 1rem 0 1rem;
+}
+
+.info-container .info-header div {
+  max-height: 50px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.info-container .info-header .info-date {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #b8b8b8;
+}
+.info-container .info-header .info-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.info-container .info-header .info-address {
+  font-size: 0.9rem;
+}
+
+.info-container .info-body {
+  max-height: 100px;
+  overflow: hidden;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0 1rem 1rem 1rem;
+}

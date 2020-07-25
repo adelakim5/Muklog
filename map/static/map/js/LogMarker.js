@@ -7,17 +7,34 @@ class LogMarker extends Marker {
     this.sidePost = sidePost;
   }
   setLogInfo() {
-    const { id, title, summary, body, address } = this.content;
+    if (!this.sidePost.isLoggedIn) return;
+    const { title, summary, address, thumbnail, pubDate } = this.content;
     const inner = document.createElement("div");
+    inner.classList.add("info-container");
+
     inner.innerHTML = `
-        <div>${title}</div>
-        <div>${address}</div>
-        <div>${summary}</div>
+        <div class="info-thumbnail">
+          <img src="${thumbnail}" alt="thumbnail"/>
+        </div>
+        <div class="info-header">
+          <div class="info-date">${pubDate}</div>
+          <div class="info-title">${title}</div>
+          <div class="info-address">${address}</div>
+        </div>
+        <div class="info-body">${summary}</div>
     `;
-    this.info = new naver.maps.InfoWindow({ content: inner });
+
+    const infoStyle = {
+      backgroundColor: "#ffffff",
+      borderColor: "none",
+      borderWidth: "0",
+      disableAnchor: true,
+    };
+    this.info = new naver.maps.InfoWindow({ content: inner, ...infoStyle });
     const infoContainer = this.info.getContent();
     infoContainer.addEventListener("click", () => {
       this.sidePost.setPostContent(this.content);
+      this.info.close();
     });
 
     const listener = naver.maps.Event.addDOMListener(
@@ -31,6 +48,10 @@ class LogMarker extends Marker {
         }
       }
     );
+
+    naver.maps.Event.addListener(this.map, "click", () => {
+      this.info.close();
+    });
   }
 }
 
