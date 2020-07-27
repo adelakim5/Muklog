@@ -8,27 +8,23 @@
 {% block content %}
 
 <div class="detail-page">
+  <div class="image">
+    {% if detail.thumbnail %}
+    <img src="{{detail.thumbnail.url}}" alt="thumbnail" width='600'>
+    {% else %}
+    <img src="{% static 'image/default.jpg' %}" alt="thumbnail" width='600'>
+    {% endif %}
+  </div>
   <h1>{{ detail.title }}</h1>
   <p> {{ detail.pub_date }} </p>
-
-  {% if detail.thumbnail %}
-  <img src="{{detail.thumbnail.url}}" alt="thumbnail" width='600'>
-  {% else %}
-  <img src="{% static 'image/default.jpg' %}" alt="thumbnail" width='600'>
-  {% endif %}
-
   <p> {{ detail.body }} </p>
-  <a href="{% url 'edit' detail.id %}">수정하기</a>
-  <a href="{% url 'delete' detail.id %}">삭제하기</a>
-  <a href="{% url 'tempHome' %}">임시홈으로 돌아가기</a>
+
+
+  <a href="{% url 'tempHome' %}"><img src="{% static 'shared/image/home.png'%}" alt="home"></a>
+  <a href="{% url 'delete' detail.id %}"><img src="{% static 'shared/image/delete.png' %}" alt="delete"></a>
+  <a href="{% url 'edit' detail.id %}"><img src="{% static 'shared/image/edit.png' %}" alt="edit"></a>
+  <div id="naver-map"></div>
 </div>
-<style>
-  #naver-map {
-    width: 50%;
-    height: 500px;
-  }
-</style>
-<div id="naver-map"></div>
 {% endblock %}
 
 {% block javascript %}

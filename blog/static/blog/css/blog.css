@@ -2,35 +2,44 @@
     box-sizing: border-box;
 }
 
+.blog{
+    background-color: #fafafa;
+}
+
 .posts {
     padding: 20px;
-    /* width: 25%; */
-    /* margin-left: auto;
-    margin-right: auto; */
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-gap: 20px;
 }
 
-.thumbnail {
-    padding: 30px;
+.thumbnail, .sum {
+    /* padding: 10px; */
     max-height: 300px;
-    /* max-width: 300px; */
+    max-width: inherit;
     overflow: hidden;
     margin-bottom: 20px;
 }
 
+.sum{
+    padding: 20px;
+}
+
 .thumbnail img {
     max-height: initial;
-    /* margin-left: -15%; */
+    margin-top: -15%;
     width: 100%;
 }
 
 .card {
     background-color: white;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow : 5px 5px 5px #b5b4b1;
+    /* padding: 20px; */
+    /* border-radius: 8px; */
+    /* box-shadow : 3px 3px 3px #b5b4b1; */
+    /* border: 2px solid #e1e1e1; */
 }
 
 .card div {
@@ -39,14 +48,18 @@
 
 .opening {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .opening h1 {
     margin-bottom: 10px;
 }
 
-.others {
-    margin-top: 20px;
-    margin-bottom: initial;
+ .others {
+    margin: 20px; 
+}
+
+.others a img{
+    margin-left: 10px;
 }
 

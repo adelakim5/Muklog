@@ -10,42 +10,48 @@ Muklog | tempHome
 {% endblock %}
 
 {% block content %}
-<body style="background-color: #f5efe3;">
 
-<!-- {% if user.is_authenticated %} -->
+<body class="blog">
 
-<!-- {% if error %}
+  <!-- {% if user.is_authenticated %} -->
+
+  <!-- {% if error %}
     {{ error }}
     {% endif %} -->
 
-<div class="posts">
-  {% if blogs %}
-  {% for blog in blogs %}
-  <div class="card">
-    <div class="opening">
-      <h1>{{ blog.title }}</h1>
-      <p>발행일: {{blog.pub_date}}</p>
+  <div class="posts">
+    {% if blogs %}
+    {% for blog in blogs %}
+    <div class="card">
+      <div class="content">
+        <div class="thumbnail">
+          {% if blog.thumbnail %}
+          <a href="{% url 'detail' blog.id %}">
+            <img src="{{ blog.thumbnail.url }}" alt="image" />
+          </a>
+          {% endif %}
+        </div>
+        <div class="opening">
+          <h2>{{ blog.title }}</h2>
+          <!-- <p>{{blog.pub_date}}</p> -->
+        </div>
+        <p class="sum">{{ blog.summary }}</p>
+      </div>
+      <div class="others">
+        <a href="{% url 'detail' blog.id %}"><img src="{% static 'shared/image/more.png' %}" alt="more"></a>
+        <a href="{% url 'edit' blog.id %}"><img src="{% static 'shared/image/edit.png' %}" alt="edit"></a>
+        <a class="delete" href="{% url 'delete' blog.id %}"><img src="{% static 'shared/image/delete.png' %}"
+            alt="delete"></a>
+      </div>
     </div>
-    <div class="thumbnail">
-      {% if blog.thumbnail %}
-      <img src="{{ blog.thumbnail.url }}" alt="image" />
-      {% endif %}
-    </div>
-    <p class="sum">{{ blog.summary }}</p>
-    <div class="others">
-      <a href="{% url 'detail' blog.id %}"><img src="{% static 'shared/image/more.png' %}" alt="more"></a>
-      <a href="{% url 'edit' blog.id %}"><img src="{% static 'shared/image/edit.png' %}" alt="edit"></a>
-      <a class="delete" href="{% url 'delete' blog.id %}"><img src="{% static 'shared/image/delete.png' %}" alt="delete"></a>
-    </div>
+    {% endfor %}
+
+    {% else %}
+    <p>write를 눌러 첫 글을 등록해주세요.</p>
+
+    {% endif %}
   </div>
-  {% endfor %}
-
-  {% else %}
-  <p>write를 눌러 첫 글을 등록해주세요.</p>
-
-  {% endif %}
-</div>
-<!-- {% endif %} -->
+  <!-- {% endif %} -->
 
 
 </body>

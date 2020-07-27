@@ -1,3 +1,33 @@
-.detail-page{
-    text-align: center;
+.detail-page {
+    width: 55%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.image img {
+    width: 100%;
+}
+
+#naver-map {
+    width: 100%;
+    height: 500px;
+    margin-bottom: 50px;
+}
+
+.detail-page h1{
+    margin-top: 5%;
+}
+
+.detail-page a{
+    float: right;
+    margin-bottom: 20px;
+}
+
+.detail-page a img{
+    margin-left: 10px;
+}
+
+.detail-page p{
+    margin-top: 20px;
+    margin-bottom: 5%;
 }
