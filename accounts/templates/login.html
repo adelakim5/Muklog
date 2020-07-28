@@ -1,16 +1,46 @@
-<div>
-    {% if error %}
-    {{ error }}
-    {% endif %}
-    <h1>로그인</h1>
+{% extends 'accountsBase.html'%}
+
+{% load static %}
+
+{% block title%}
+Muklog | Login
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'blog/css/mypage.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="mypage">
+    <div class="error-msg">
+        {% if error %}
+        {{ error }}
+        {% endif %}
+    </div>
+    <div class="usernameInfo">
+        <h1>로그인</h1>
+    </div>
     <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
-        Username: <input type="text" name="username" id="">
-        <br>
-        Password: <input type="password" name="password" id="">
-        <br>
-        <input type="hidden" name="next" value="{{ next }}">
-        <input type="submit" value="login" id="">
+        <div class="mypage-contents">
+            <h4>
+                아이디 <input type="text" name="username" id="">
+            </h4>
+            <h4>
+                비밀번호 <input type="password" name="password" id="">
+            </h4>
+            <input type="hidden" name="next" value="{{ next }}">
+            <input class="applyChange" type="submit" value="확인" id="">
+        </div>
     </form>
-    <a href="{% url 'signup' %}?next={{request.path}}">회원가입 고</a>
+    <div class="home-btn">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'shared/image/mypagehome.png'%}" alt="home">
+        </a>
+    </div>
+    <div class="joinGo">
+        <a href="{% url 'signup' %}?next={{request.path}}">회원가입</a>
+    </div>
 </div>
+
+{% endblock %}

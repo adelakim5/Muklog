@@ -13,11 +13,11 @@ Muklog | tempHome
 
 <body class="blog">
 
-  <!-- {% if user.is_authenticated %} -->
+  {% if user.is_authenticated %}
 
-  <!-- {% if error %}
-    {{ error }}
-    {% endif %} -->
+  {% if error %}
+  {{ error }}
+  {% endif %}
 
   <div class="posts">
     {% if blogs %}
@@ -47,11 +47,17 @@ Muklog | tempHome
     {% endfor %}
 
     {% else %}
-    <p>write를 눌러 첫 글을 등록해주세요.</p>
+    <p>좌측 상단의 <img src="{% static 'shared/image/plus.png'%}" alt="write" width="14" height="14">
+      를 눌러 첫 글을 작성해보세요.
+    </p>
 
     {% endif %}
   </div>
-  <!-- {% endif %} -->
+  {% else %}
+  <p>
+    로그인하여 글을 작성해주세요.
+  </p>
+  {% endif %}
 
 
 </body>

@@ -1,26 +1,33 @@
 {% extends 'accountsBase.html'%}
 
+{% load static %}
+
 {% block title%}
 Muklog | SignUp
 {% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'blog/css/mypage.css'%}">
+{% endblock %}
+
 {% block content %}
 
-<div>
+<div class="mypage">
     {% if error %}
     {{error}}
     {% endif %}
-    <h1>회원가입</h1>
+    <div class="usernameInfo">
+        <h1>회원가입</h1>
+    </div>
     <form action="{% url 'signup' %}" method="POST">
         {% csrf_token %}
-        Username: <input type="text" name="username" id="">
-        <br>
-        Password: <input type="password" name="password1" id="">
-        <br>
-        Confirm Password: <input type="password" name="password2" id="">
-        <br>
-        <input type="hidden" name="next" value={{next}}>
-        <input type="submit" value="sign up">
+        <div class="mypage-contents">
+            <h4>아이디 <input type="text" name="username" id=""></h4>
+            <h4>비밀번호 <input type="password" name="password1" id=""></h4>
+            <h4>비밀번호 확인 <input type="password" name="password2" id=""></h4>
+            <input type="hidden" name="next" value={{next}}>
+            <input class="applyChange" type="submit" value="가입하기">
+        </div>
     </form>
 </div>
 

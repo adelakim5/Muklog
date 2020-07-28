@@ -23,6 +23,7 @@
   <a href="{% url 'tempHome' %}"><img src="{% static 'shared/image/home.png'%}" alt="home"></a>
   <a href="{% url 'delete' detail.id %}"><img src="{% static 'shared/image/delete.png' %}" alt="delete"></a>
   <a href="{% url 'edit' detail.id %}"><img src="{% static 'shared/image/edit.png' %}" alt="edit"></a>
+  <h4>{{detail.address}}</h4>
   <div id="naver-map"></div>
 </div>
 {% endblock %}

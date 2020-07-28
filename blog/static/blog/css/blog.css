@@ -1,9 +1,6 @@
-* {
-    box-sizing: border-box;
-}
-
 .blog{
     background-color: #fafafa;
+    
 }
 
 .posts {
@@ -16,6 +13,10 @@
     grid-gap: 20px;
 }
 
+/* .posts p{
+    font-family: 'MapoPeacefull';
+} */
+
 .thumbnail, .sum {
     /* padding: 10px; */
     max-height: 300px;
@@ -25,6 +26,7 @@
 }
 
 .sum{
+    font-family: 'MapoPeacefull';
     padding: 20px;
 }
 

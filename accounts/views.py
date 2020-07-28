@@ -16,7 +16,7 @@ def signup(request):
             )
             auth.login(request, user)
             return redirect(next)
-        return render(request, 'signup.html', {'error':'confirm your password again'})
+        return render(request, 'signup.html', {'error':'비밀번호를 다시 확인해주세요.'})
     else:
         next = request.GET['next']
         return render(request, 'signup.html', {'next':next})
@@ -36,7 +36,7 @@ def login(request):
             return redirect(next)
             # return HttpResponseRedirect('/blog/')
         else:
-            return render(request, 'login.html', {'error': 'username or password is incorrect'})
+            return render(request, 'login.html', {'error': '아이디 또는 비밀번호가 맞지 않습니다.'})
     else:
         return render(request, 'login.html', {"next": next})
 

@@ -27,7 +27,8 @@
     margin-left: 10px;
 }
 
-.detail-page p{
+.detail-page p, h4{
+    font-family: 'MapoPeacefull';
     margin-top: 20px;
     margin-bottom: 5%;
 }

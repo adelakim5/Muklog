@@ -1,0 +1,95 @@
+@font-face {
+    font-family: 'MyLotteMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.0/MyLotteMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.mypage {
+    color: #2e2e2d;
+    margin-top: 100px;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.usernameInfo {
+    font-family: 'MyLotteMedium';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.usernameInfo img {
+    margin-bottom: 20px;
+}
+
+.mypage-contents {
+    font-family: 'MapoPeacefull';
+    display: flex;
+    flex-direction: column;
+    border: solid 1px #e1e1e1;
+    border-radius: 8px;
+    justify-content: center;
+}
+
+.mypage-contents h4 {
+    margin: 20px 20px 0 20px;
+    /* padding: 20px 50px 0 50px; */
+}
+
+.mypage-contents input {
+    margin-top: 10px;
+    width: 100%;
+    border: solid 1px #e1e1e1;
+    height: 30px;
+    padding: 10px;
+}
+
+.mypage-contents .applyChange {
+    width: 100%;
+    margin-top: 50px;
+    height: 50px;
+    background-color: #e1e1e1;
+}
+
+.mypage-contents .applyChange:hover {
+    background-color: #f5be7f;
+}
+
+.home-btn {
+    margin: 50px;
+}
+
+.deleteInfoBtn input {
+    width: 90px;
+    height: 36px;
+    border: solid 1px #2e2e2d;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.deleteInfoBtn input:hover {
+    background-color: #2e2e2d;
+    color: white;
+}
+
+.joinGo a {
+    font-family: 'MyLotteMedium';
+    color: #b3b1af;
+    text-decoration: none;
+}
+
+.joinGo a:hover {
+    color: #2e2e2d
+}
+
+.error-msg{
+    font-family: 'MapoPeacefull';
+    margin: 30px;
+}
