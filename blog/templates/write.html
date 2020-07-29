@@ -29,7 +29,7 @@ Muklog | Write
         <input type="text" name="address" id="place-input" placeholder="주소를 입력하세요."/>
         <!-- <h4>body:</h4> -->
         <input type="file" name="image" id="imageUpload" accept="media/*" />
-        <textarea name="body" placeholder="당신의 이야기를 적어보세요..."></textarea>
+        <textarea class="autosize" onkeydown="resize(this)" onkeyup="resize(this)" name="body" placeholder="당신의 이야기를 적어보세요..."></textarea>
         <input type="text" name="lat" id="map-lat" value="" placeholder="위도" hidden/>
         <input type="text" name="lng" id="map-lng" value="" placeholder="경도" hidden/>
         <input id="uploadButton" type="submit" value="올리기" />
@@ -42,6 +42,12 @@ Muklog | Write
   </div>
 </div>
 {% endblock %} {% block javascript %}
+<script>
+  function resize(obj) {
+      obj.style.height = "1px";
+      obj.style.height = (12 + obj.scrollHeight) + "px";
+  }
+</script>
 <script type="text/javascript"
   src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}&submodules=geocoder"></script>
 <script type="module">
