@@ -32,18 +32,18 @@ Muklog | tempHome
           {% endif %}
         </div>
         <div class="opening">
-          <h2>{{ blog.title }}</h2>
-          <!-- <p>{{blog.pub_date}}</p> -->
+          <h3>{{ blog.title }}</h3>
+          <p>{{blog.pub_date|date:"Y-m-d"}}</p>
         </div>
         <p class="sum">{{ blog.summary }}</p>
       </div>
-      <div class="others">
+      <!-- <div class="others">
         <a href="{% url 'detail' blog.id %}"><img src="{% static 'shared/image/more.png' %}" alt="more"></a>
         <a href="{% url 'edit' blog.id %}"><img src="{% static 'shared/image/edit.png' %}" alt="edit"></a>
         <a class="delete" href="{% url 'delete' blog.id %}"><img src="{% static 'shared/image/delete.png' %}"
-            alt="delete"></a>
+          alt="delete"></a>
+        </div> -->
       </div>
-    </div>
     {% endfor %}
 
     {% else %}

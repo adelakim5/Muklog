@@ -1,0 +1,131 @@
+body {
+    background-color: #fbfdfc;
+}
+
+input{
+    border: none;
+}
+
+input:focus{
+    outline: none;
+}
+
+textarea:focus{
+    outline: none;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+    /* font-family: 'MapoPeacefull'; */
+}
+
+.write-page{
+    margin: 20px 0 20px 0;
+    padding: 30px;
+    background-color: white;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+}
+
+#naver-map{
+    width: 100%;
+    height: 500px;
+}
+
+#map-search {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+}
+
+#map-search input{
+    font-family: 'MapoPeacefull';
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    /* border: none; */
+    border-bottom: 2px solid #737272;
+}
+
+#search-list{
+    margin: 10px 0 30px 0;
+    color: coral;
+    /* font-weight: bold; */
+    font-family: 'MapoPeacefull';
+}
+
+/* #map-search input:focus, #post-title:focus{
+    outline: none;
+} */
+
+#map-search button{
+    width: 70px;
+    background-color:#737272;
+    border-radius: 4px;
+    border: none;
+    color: white;
+}
+
+#map-search button:hover{
+    background-color: #5c5b5b;
+    color:white;
+}
+
+.write-contents input{
+    margin-top: 20px;
+    width: 100%;
+}
+
+#post-title{
+    height: 65px;
+    font-size: 2.75rem;
+    font-weight: bold;
+    border: none;
+    color: #2e2e2d;
+}
+
+#post-title::placeholder, textarea::placeholder, #map-search input::placeholder{
+    color: #afb7be;
+}
+
+textarea{
+    color: #2e2e2d;
+    font-size: 15px;
+    padding:20px;
+    margin-top: 20px;
+    width: 100%;
+    /* height: 500px; */
+    border: none;
+    font-family: 'MapoPeacefull';
+}
+
+textarea.autosize { min-height: 50px; }
+
+.underBar{
+    height: 6px;
+    width: 4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    background-color: #737272;
+    border-radius: 1px;
+}
+
+#uploadButton{
+    color: #2e2e2d;
+    border-radius: 8px;
+    height:50px;
+    font-size: 16px;
+    font-family: 'MapoPeacefull';
+    /* background-color: #f5be7fcd; */
+}
+
+#uploadButton:hover{
+    background-color: #f5be7fcd;
+}
+
+.goToHomes{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}

@@ -1,6 +1,6 @@
 .blog{
     background-color: #fafafa;
-    
+    color: #2e2e2d;
 }
 
 .posts {
@@ -19,28 +19,29 @@
 
 .thumbnail, .sum {
     /* padding: 10px; */
-    max-height: 300px;
+    max-height: 150px;
     max-width: inherit;
     overflow: hidden;
     margin-bottom: 20px;
 }
 
 .sum{
-    font-family: 'MapoPeacefull';
-    padding: 20px;
+    /* font-family: 'MapoPeacefull'; */
+    padding: 0 20px 0 20px;
+    font-size: 13px;
 }
 
 .thumbnail img {
     max-height: initial;
-    margin-top: -15%;
+    margin-top: -25%;
     width: 100%;
 }
 
 .card {
     background-color: white;
     /* padding: 20px; */
-    /* border-radius: 8px; */
-    /* box-shadow : 3px 3px 3px #b5b4b1; */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .05);
     /* border: 2px solid #e1e1e1; */
 }
 
@@ -53,15 +54,15 @@
     margin-bottom: 20px;
 }
 
-.opening h1 {
-    margin-bottom: 10px;
+.opening p{
+    font-size: 12px;
 }
 
- .others {
+ /* .others {
     margin: 20px; 
 }
 
 .others a img{
     margin-left: 10px;
-}
+} */
 

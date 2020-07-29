@@ -1,6 +1,10 @@
 {% extends "mapTemplate.html" %}
 {% load static %}
 
+{% block title %}
+Muklog | {{detail.id}}
+{% endblock %}
+
 {% block css %}
 <link rel="stylesheet" href="{% static 'blog/css/detail.css'%}">
 {% endblock%}
@@ -17,14 +21,22 @@
   </div>
   <h1>{{ detail.title }}</h1>
   <p> {{ detail.pub_date }} </p>
-  <p> {{ detail.body }} </p>
-
-
-  <a href="{% url 'tempHome' %}"><img src="{% static 'shared/image/home.png'%}" alt="home"></a>
-  <a href="{% url 'delete' detail.id %}"><img src="{% static 'shared/image/delete.png' %}" alt="delete"></a>
-  <a href="{% url 'edit' detail.id %}"><img src="{% static 'shared/image/edit.png' %}" alt="edit"></a>
-  <h4>{{detail.address}}</h4>
-  <div id="naver-map"></div>
+  <div class="btns">
+    <a href="{% url 'delete' detail.id %}"><img src="{% static 'shared/image/delete.png' %}" alt="delete"></a>
+    <a href="{% url 'edit' detail.id %}"><img src="{% static 'shared/image/edit.png' %}" alt="edit"></a>
+  </div>
+  <div class="content-box">
+    <p> {{ detail.body }} </p>
+  </div>
+  <div class="map">
+    <h3>{{detail.address}}</h3>
+    <div id="naver-map"></div>
+  </div>
+  <hr>
+  <div class="goToHomes">
+    <a href="{% url 'home' %}"><img src="{% static 'shared/image/mapHome.png'%}" alt="goToMap"></a>
+    <a href="{% url 'tempHome' %}"><img src="{% static 'shared/image/blogHome.png'%}" alt="goToBlog"></a>
+  </div>
 </div>
 {% endblock %}
 

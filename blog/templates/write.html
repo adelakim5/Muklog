@@ -1,46 +1,49 @@
-{% extends "mapTemplate.html" %} 
+{% extends "mapTemplate.html" %}
 {% load static %}
 
-{% block title %} 
- Muklog | Write
+{% block title %}
+Muklog | Write
 {% endblock %}
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'blog/css/map.css' %}" />
+<link rel="stylesheet" href="{% static 'blog/css/write.css' %}">
 {% endblock %}
 
 {% block content %}
-<div id="naver-map"></div>
-<div>
-  <input type="text" id="search" value="" />
-  <button id="search-btn">검색</button>
-  <div id="search-list"></div>
-  <form method="post" action="{% url 'create' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    <h4>title:</h4>
-    <input type="text" name="title" />
-    <br />
-    <input type="text" name="address" id="place-input" />
-    <br />
-    <br />
-    <h4>body:</h4>
-    <textarea cols="40" rows="10" name="body"></textarea>
-    <br />
-    <br />
-    <input type="text" name="lat" id="map-lat" value="" />
-    <input type="text" name="lng" id="map-lng" value="" />
-    <input type="file" name="image" id="imageUpload" accept="media/*" />
-    <input type="submit" value="submit" />
-  </form>
-
-  <a href="{% url 'home' %}">맵홈으로 돌아가기</a>
-  <a href="{% url 'tempHome' %}">임시홈으로 돌아가기</a>
+<div class="write-page">
+  <div id="naver-map"></div>
+  <div id="map-search">
+    <input type="text" id="search" placeholder="주소를 검색해보세요." />
+    <button id="search-btn">검색</button>
+  </div>
+  <div>
+    <div id="search-list"></div>
+    <form method="post" action="{% url 'create' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!-- <h4>title:</h4> -->
+      <div class="write-contents">
+        <input id="post-title" type="text" name="title" placeholder="제목을 입력하세요."/>
+        <div class="underBar"></div>
+        <!-- <h4>주소</h4> -->
+        <input type="text" name="address" id="place-input" placeholder="주소를 입력하세요."/>
+        <!-- <h4>body:</h4> -->
+        <input type="file" name="image" id="imageUpload" accept="media/*" />
+        <textarea name="body" placeholder="당신의 이야기를 적어보세요..."></textarea>
+        <input type="text" name="lat" id="map-lat" value="" placeholder="위도" hidden/>
+        <input type="text" name="lng" id="map-lng" value="" placeholder="경도" hidden/>
+        <input id="uploadButton" type="submit" value="올리기" />
+      </div>
+    </form>
+    <div class="goToHomes">
+      <a href="{% url 'home' %}"><img src="{% static 'shared/image/mapHome.png'%}" alt="goToMap"></a>
+      <a href="{% url 'tempHome' %}"><img src="{% static 'shared/image/blogHome.png'%}" alt="goToBlog"></a>
+    </div>
+  </div>
 </div>
 {% endblock %} {% block javascript %}
-<script
-  type="text/javascript"
-  src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}&submodules=geocoder"
-></script>
+<script type="text/javascript"
+  src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ naver_client_id }}&submodules=geocoder"></script>
 <script type="module">
   import SearchMap from "../static/blog/js/SearchMap.js";
 

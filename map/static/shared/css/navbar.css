@@ -18,6 +18,10 @@
     margin-bottom: 10px;
 }
 
+.nav a{
+    color: #2e2e2d;
+}
+
 .nav-left a {
     float: left;
     text-align: center;
@@ -34,7 +38,6 @@
     padding: 14px 16px;
     height: 100%;
     text-align: center;
-    color: black;
     text-decoration: none;
     font-size: 14px;
 }
@@ -52,10 +55,9 @@
     top: 50%;
     transform: translate(-50%, -50%);
     text-decoration: none;
-    font-weight: bolder;
-    color: black;
+    font-weight: bold;
 }
 
 .nav-center a:hover {
-    color: #f5be7f;
+    color: #f5be7fcd ;
 }
