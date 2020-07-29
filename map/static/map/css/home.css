@@ -39,6 +39,7 @@
   width: 0;
   height: 0;
   transition: width 0.5s;
+  overflow-y: scroll;
 }
 #side-post .side-post-container-active {
   width: 40vw;
